@@ -3,14 +3,20 @@
     <div class="hero-body">
       <div class="container">
         <h1 class="title">The Star Wars App</h1>
-        <h2 class="subtitle">Nuxt.js</h2>
+        <h2 class="subtitle">{{title}}</h2>
       </div>
     </div>
   </section>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      title: 'Planets',
+    };
+  },
+};
 </script>
 
 <style>
