@@ -1,28 +1,28 @@
 import axios from 'axios';
 
 const API_BASE_URL = 'https://swapi.co/api';
+const ENDPOINT_FILMS = `${API_BASE_URL}/films`;
 const ENDPOINT_PEOPLE = `${API_BASE_URL}/people`;
 
 export const state = () => ({
-  people: []
+  films: null
 });
 
 export const mutations = {
-  SET_PEOPLE: (state, payload) => {
-    state.people = payload;
+  SET_FILMS: (state, payload) => {
+    state.films = payload;
   }
 };
 
 export const actions = {
-  async fetchPeople({ commit }) {
-    const response = await axios
-      .get(`${ENDPOINT_PEOPLE}`)
-      .catch(error => console.log(error));
+  async fetchFilms({ commit }) {
+    const { data } = await axios.get(`${ENDPOINT_FILMS}`);
+    commit('SET_FILMS', data.results);
+  }
+};
 
-    if (response.data) {
-      commit('SET_PEOPLE', response.data);
-    } else {
-      // TODO: error handler
-    }
+export const getters = {
+  getFilmByTitle: state => title => {
+    return state.films.find(film => film.title === title);
   }
 };
