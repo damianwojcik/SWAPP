@@ -2,11 +2,11 @@
   <section class="hero">
     <div class="hero-body">
       <div class="container">
-        <h1 class="title">Film:</h1>
-        <h2 class="subtitle">{{film.title}}</h2>
+        <h1 class="title">Character:</h1>
+        <h2 class="subtitle">{{person.name}}</h2>
         <table class="table">
           <tbody>
-            <tr v-for="(item, name, index) in film" :key="index">
+            <tr v-for="(item, name, index) in person" :key="index">
               <td>{{name}}</td>
               <td>{{item}}</td>
             </tr>
@@ -20,14 +20,14 @@
 <script>
 export default {
   async fetch({ store }) {
-    if (!store.state.films) {
-      await store.dispatch('fetchFilms');
+    if (!store.state.people) {
+      await store.dispatch('fetchPeople');
     }
   },
   computed: {
-    film() {
-      const title = this.$route.params.id.replace(/_/g, ' ');
-      return this.$store.getters.getFilmByTitle(title);
+    person() {
+      const name = this.$route.params.id.replace(/_/g, ' ');
+      return this.$store.getters.getPersonByName(name);
     },
   },
 };

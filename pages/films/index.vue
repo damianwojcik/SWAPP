@@ -4,10 +4,9 @@
       <div class="container">
         <h1 class="title">The Star Wars App</h1>
         <h2 class="subtitle">{{title}}</h2>
-        <div v-for="film in films" :key="film.episode_id">
+        <div v-for="(film, index) in films" :key="index">
           <nuxt-link
-            :to="{ path: `${film.title.replace(/\s+/g,'-')}` }"
-            class="navbar-item"
+            :to="{ path: `${film.title.replace(/\s+/g, '_').toLowerCase()}` }"
             append
           >{{film.title}}</nuxt-link>
         </div>
