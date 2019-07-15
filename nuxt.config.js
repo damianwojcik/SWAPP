@@ -43,6 +43,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},
+  serverMiddleware: ['~/api/index.js'],
   /*
    ** Build configuration
    */
