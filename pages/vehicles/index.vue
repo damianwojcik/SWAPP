@@ -20,18 +20,18 @@ import axios from 'axios';
 
 export default {
   async fetch({ store }) {
-    if (!store.state.planets) {
-      await store.dispatch('fetchPlanets');
+    if (!store.state.vehicles) {
+      await store.dispatch('fetchVehicles');
     }
   },
   computed: {
     data() {
-      return this.$store.state.planets;
+      return this.$store.state.vehicles;
     },
   },
   data() {
     return {
-      title: 'Planets',
+      title: 'Vehicles',
     };
   },
 };

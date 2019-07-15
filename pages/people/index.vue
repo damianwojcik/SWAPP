@@ -4,11 +4,11 @@
       <div class="container">
         <h1 class="title">The Star Wars App</h1>
         <h2 class="subtitle">{{title}}</h2>
-        <div v-for="(person, index) in people" :key="index">
+        <div v-for="(item, index) in data" :key="index">
           <nuxt-link
-            :to="{ path: `${person.name.replace(/\s+/g, '_').toLowerCase()}` }"
+            :to="{ path: `${item.name.replace(/\s+/g, '_').toLowerCase()}` }"
             append
-          >{{person.name}}</nuxt-link>
+          >{{item.name}}</nuxt-link>
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@ export default {
     }
   },
   computed: {
-    people() {
+    data() {
       return this.$store.state.people;
     },
   },

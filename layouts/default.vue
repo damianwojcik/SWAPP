@@ -24,6 +24,9 @@
           <nuxt-link to="/" class="navbar-item">Home</nuxt-link>
           <nuxt-link to="/films" class="navbar-item">Films</nuxt-link>
           <nuxt-link to="/people" class="navbar-item">People</nuxt-link>
+          <nuxt-link to="/starships" class="navbar-item">Starships</nuxt-link>
+          <nuxt-link to="/vehicles" class="navbar-item">Vehicles</nuxt-link>
+          <nuxt-link to="/species" class="navbar-item">Species</nuxt-link>
           <nuxt-link to="/planets" class="navbar-item">Planets</nuxt-link>
         </div>
       </div>
