@@ -8,7 +8,14 @@
           <tbody>
             <tr v-for="(item, name, index) in person" :key="index">
               <td>{{name}}</td>
-              <td>{{item}}</td>
+              <td v-if="name === 'films'">
+                <div v-for="(nestedItem, nestedIndex) in item" :key="nestedIndex">
+                  <nuxt-link
+                    :to="{ path: `/films/${nestedItem.replace(/\s+/g, '_').toLowerCase()}` }"
+                  >{{nestedItem}}</nuxt-link>
+                </div>
+              </td>
+              <td v-else>{{item}}</td>
             </tr>
           </tbody>
         </table>

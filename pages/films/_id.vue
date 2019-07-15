@@ -8,7 +8,14 @@
           <tbody>
             <tr v-for="(item, name, index) in film" :key="index">
               <td>{{name}}</td>
-              <td>{{item}}</td>
+              <td v-if="name === 'characters'">
+                <div v-for="(nestedItem, nestedIndex) in item" :key="nestedIndex">
+                  <nuxt-link
+                    :to="{ path: `/people/${nestedItem.replace(/\s+/g, '_').toLowerCase()}` }"
+                  >{{nestedItem}}</nuxt-link>
+                </div>
+              </td>
+              <td v-else>{{item}}</td>
             </tr>
           </tbody>
         </table>
@@ -20,6 +27,9 @@
 <script>
 export default {
   async fetch({ store }) {
+    if (!store.state.people) {
+      await store.dispatch('fetchPeople');
+    }
     if (!store.state.films) {
       await store.dispatch('fetchFilms');
     }
