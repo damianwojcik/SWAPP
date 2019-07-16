@@ -8,10 +8,10 @@
           <tbody>
             <tr v-for="(item, name, index) in data" :key="index">
               <td>{{name}}</td>
-              <td v-if="name === 'characters'">
-                <div v-for="(nestedItem, nestedIndex) in item" :key="nestedIndex">
+              <td v-if="Array.isArray(item)">
+                <div v-for="(nestedItem, nestedName, nestedIndex) in item" :key="nestedIndex">
                   <nuxt-link
-                    :to="{ path: `/people/${nestedItem.replace(/\s+/g, '_').toLowerCase()}` }"
+                    :to="{ path: `/${name}/${nestedItem.replace(/\s+/g, '_').toLowerCase()}` }"
                   >{{nestedItem}}</nuxt-link>
                 </div>
               </td>

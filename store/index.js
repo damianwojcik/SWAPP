@@ -42,12 +42,8 @@ export const actions = {
     await dispatch('fetchPlanets');
   },
   async fetchFilms({ commit }) {
-    const { data } = await axios.get(`${API_BASE_URL}/films`);
-
-    if (data) {
-      const films = data.results;
-      commit('SET_FILMS', films);
-    }
+    const { data } = await axios.get(`http://localhost:3000/api/films`);
+    commit('SET_FILMS', data);
   },
   async fetchPeople({ commit }) {
     const { data } = await axios.get(`http://localhost:3000/api/people`);
@@ -74,11 +70,34 @@ export const actions = {
 export const getters = {
   getFilmByTitle: state => title => {
     const film = state.films.find(film => film.title.toLowerCase() === title);
-    const updatedCharacters = film.characters.map(character => {
-      const person = state.people.find(person => person.url == character);
-      return person.name;
+
+    // TODO: make a helper function
+    const updatedPeople = film.people.map(url => {
+      return state.people.find(person => person.url === url).name;
     });
-    const updatedFilm = { ...film, characters: updatedCharacters };
+    const updatedPlanets = film.planets.map(url => {
+      return state.planets.find(item => item.url === url).name;
+    });
+    const updatedStarships = film.starships.map(url => {
+      return state.starships.find(item => item.url === url).name;
+    });
+    const updatedVehicles = film.vehicles.map(url => {
+      return state.vehicles.find(item => item.url === url).name;
+    });
+    const updatedSpecies = film.species.map(url => {
+      return state.species.find(item => item.url === url).name;
+    });
+    // TODO: .
+
+    const updatedFilm = {
+      ...film,
+      people: updatedPeople,
+      planets: updatedPlanets,
+      starships: updatedStarships,
+      vehicles: updatedVehicles,
+      species: updatedSpecies,
+    };
+
     return updatedFilm;
   },
   getPersonByName: state => name => {

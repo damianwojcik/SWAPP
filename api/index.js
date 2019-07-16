@@ -22,6 +22,20 @@ async function fetchPaginationAPI(URL) {
   return result;
 }
 
+app.get('/films', async (req, res, next) => {
+  const response = await axios.get(`${API_BASE_URL}/films`);
+  const films = response.data.results;
+
+  // TODO: rename without changing order in JSON
+  const updatedFilms = films.map(film => {
+    film['people'] = film['characters'];
+    delete film['characters'];
+    return film;
+  });
+
+  res.json(updatedFilms);
+});
+
 app.get('/people', async (req, res, next) => {
   const response = await fetchPaginationAPI(`${API_BASE_URL}/people`);
 
