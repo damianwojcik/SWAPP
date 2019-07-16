@@ -3,6 +3,14 @@ const app = express();
 const axios = require('axios');
 
 const API_BASE_URL = 'https://swapi.co/api';
+const API_ENDPOINTS = [
+  'films',
+  'people',
+  'starships',
+  'vehicles',
+  'species',
+  'planets',
+];
 
 app.get('/', (req, res, next) => {
   res.send('API root');
@@ -37,49 +45,23 @@ async function fetchPaginationAPI(URL) {
   return result;
 }
 
-// TODO: create single endpoint based on store fetchData
-app.get('/films', async (req, res, next) => {
-  const response = await fetchPaginationAPI(`${API_BASE_URL}/films`);
-  const films = response;
+app.get('/data', async (req, res, next) => {
+  let promises = [];
+  let data = {};
 
-  // TODO: rename without changing order in JSON
-  const updatedFilms = films.map(film => {
-    film['people'] = film['characters'];
-    delete film['characters'];
-    return film;
-  });
+  API_ENDPOINTS.forEach(endpoint =>
+    promises.push(fetchPaginationAPI(`${API_BASE_URL}/${endpoint}`)),
+  );
 
-  res.json(updatedFilms);
-});
+  await axios.all(promises).then(
+    axios.spread((...responses) => {
+      responses.forEach((res, index) => {
+        data[API_ENDPOINTS[index]] = res;
+      });
+    }),
+  );
 
-app.get('/people', async (req, res, next) => {
-  const response = await fetchPaginationAPI(`${API_BASE_URL}/people`);
-
-  res.json(response);
-});
-
-app.get('/starships', async (req, res, next) => {
-  let response = await fetchPaginationAPI(`${API_BASE_URL}/starships`);
-
-  res.json(response);
-});
-
-app.get('/vehicles', async (req, res, next) => {
-  let response = await fetchPaginationAPI(`${API_BASE_URL}/vehicles`);
-
-  res.json(response);
-});
-
-app.get('/species', async (req, res, next) => {
-  let response = await fetchPaginationAPI(`${API_BASE_URL}/species`);
-
-  res.json(response);
-});
-
-app.get('/planets', async (req, res, next) => {
-  let response = await fetchPaginationAPI(`${API_BASE_URL}/planets`);
-
-  res.json(response);
+  res.json(data);
 });
 
 module.exports = {

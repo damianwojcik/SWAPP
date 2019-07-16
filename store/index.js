@@ -1,14 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:3000/api/';
-const API_ENDPOINTS = [
-  'films',
-  'people',
-  'starships',
-  'vehicles',
-  'species',
-  'planets',
-];
+const API_BASE_URL = 'http://localhost:3000/api';
 
 export const state = () => ({
   data: null,
@@ -24,23 +16,8 @@ export const actions = {
   async nuxtServerInit({ dispatch }) {
     await dispatch('fetchData');
   },
-  // TODO: move to api
   async fetchData({ commit }) {
-    let promises = [];
-    let data = {};
-
-    API_ENDPOINTS.forEach(endpoint =>
-      promises.push(axios.get(`${API_BASE_URL}${endpoint}`)),
-    );
-
-    await axios.all(promises).then(
-      axios.spread((...responses) => {
-        responses.forEach((res, index) => {
-          data[API_ENDPOINTS[index]] = res.data;
-        });
-      }),
-    );
-
+    const { data } = await axios.get(`${API_BASE_URL}/data`);
     commit('SET_DATA', data);
   },
 };
@@ -52,7 +29,7 @@ export const getters = {
     );
 
     // TODO: make a helper function
-    const updatedPeople = film.people.map(url => {
+    const updatedPeople = film.characters.map(url => {
       return state.data.people.find(person => person.url === url).name;
     });
     const updatedPlanets = film.planets.map(url => {
