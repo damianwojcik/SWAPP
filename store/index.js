@@ -29,8 +29,8 @@ export const getters = {
     );
 
     // TODO: make a helper function
-    const updatedPeople = film.characters.map(url => {
-      return state.data.people.find(person => person.url === url).name;
+    const updatedCharacters = film.characters.map(url => {
+      return state.data.people.find(item => item.url === url).name;
     });
     const updatedPlanets = film.planets.map(url => {
       return state.data.planets.find(item => item.url === url).name;
@@ -48,7 +48,7 @@ export const getters = {
 
     const updatedFilm = {
       ...film,
-      people: updatedPeople,
+      characters: updatedCharacters,
       planets: updatedPlanets,
       starships: updatedStarships,
       vehicles: updatedVehicles,
