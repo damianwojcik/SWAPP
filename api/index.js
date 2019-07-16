@@ -9,22 +9,38 @@ app.get('/', (req, res, next) => {
 });
 
 async function fetchPaginationAPI(URL) {
-  let response = await axios.get(URL);
-  let data = response ? response.data : null;
+  const response = await axios.get(URL);
+  const data = response ? response.data : null;
+  const paginationCount = Math.ceil(data.count / 10);
+  let promises = [];
   let result = [];
+
   result.push.apply(result, data.results);
 
-  while (data.next !== null) {
-    response = await axios.get(data.next);
-    data = response ? response.data : null;
-    result.push.apply(result, data.results);
+  if (!data.next) return result;
+
+  const nextUrl = data.next.split('=')[0];
+
+  for (let page = 2; page <= paginationCount; page++) {
+    let url = `${nextUrl}=${page}`;
+    promises.push(axios.get(url));
   }
+
+  await axios.all(promises).then(
+    axios.spread((...responses) => {
+      responses.forEach(res => {
+        result.push.apply(result, res.data.results);
+      });
+    }),
+  );
+
   return result;
 }
 
+// TODO: create single endpoint based on store fetchData
 app.get('/films', async (req, res, next) => {
-  const response = await axios.get(`${API_BASE_URL}/films`);
-  const films = response.data.results;
+  const response = await fetchPaginationAPI(`${API_BASE_URL}/films`);
+  const films = response;
 
   // TODO: rename without changing order in JSON
   const updatedFilms = films.map(film => {

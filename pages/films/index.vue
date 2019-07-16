@@ -21,7 +21,7 @@ import axios from 'axios';
 export default {
   computed: {
     data() {
-      return this.$store.state.films;
+      return this.$store.state.data.films;
     },
   },
   data() {
