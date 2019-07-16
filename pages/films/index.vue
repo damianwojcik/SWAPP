@@ -19,11 +19,6 @@
 import axios from 'axios';
 
 export default {
-  async fetch({ store }) {
-    if (!store.state.films) {
-      await store.dispatch('fetchFilms');
-    }
-  },
   computed: {
     data() {
       return this.$store.state.films;

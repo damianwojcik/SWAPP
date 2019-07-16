@@ -19,11 +19,6 @@
 import axios from 'axios';
 
 export default {
-  async fetch({ store }) {
-    if (!store.state.planets) {
-      await store.dispatch('fetchPlanets');
-    }
-  },
   computed: {
     data() {
       return this.$store.state.planets;

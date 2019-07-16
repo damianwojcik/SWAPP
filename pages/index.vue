@@ -9,15 +9,5 @@
   </section>
 </template>
 
-<script>
-export default {
-  mounted() {
-    if (!this.$store.state.films) {
-      this.$store.dispatch('fetchFilms');
-    }
-  },
-};
-</script>
-
 <style>
 </style>

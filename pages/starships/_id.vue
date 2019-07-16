@@ -2,20 +2,21 @@
   <section class="hero">
     <div class="hero-body">
       <div class="container">
-        <h1 class="title">Film:</h1>
-        <h2 class="subtitle">{{data.title}}</h2>
+        <h1 class="title">Starship:</h1>
+        <h2 class="subtitle">{{data.name}}</h2>
         <table class="table">
           <tbody>
             <tr v-for="(item, name, index) in data" :key="index">
               <td>{{name}}</td>
-              <td v-if="name === 'characters'">
+              <td>{{item}}</td>
+              <!-- <td v-if="name === 'films'">
                 <div v-for="(nestedItem, nestedIndex) in item" :key="nestedIndex">
                   <nuxt-link
-                    :to="{ path: `/people/${nestedItem.replace(/\s+/g, '_').toLowerCase()}` }"
+                    :to="{ path: `/films/${nestedItem.replace(/\s+/g, '_').toLowerCase()}` }"
                   >{{nestedItem}}</nuxt-link>
                 </div>
               </td>
-              <td v-else>{{item}}</td>
+              <td v-else>{{item}}</td>-->
             </tr>
           </tbody>
         </table>
@@ -28,8 +29,8 @@
 export default {
   computed: {
     data() {
-      const title = this.$route.params.id.replace(/_/g, ' ');
-      return this.$store.getters.getFilmByTitle(title);
+      const name = this.$route.params.id.replace(/_/g, ' ');
+      return this.$store.getters.getStarshipByName(name);
     },
   },
 };

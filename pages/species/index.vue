@@ -19,11 +19,6 @@
 import axios from 'axios';
 
 export default {
-  async fetch({ store }) {
-    if (!store.state.species) {
-      await store.dispatch('fetchSpecies');
-    }
-  },
   computed: {
     data() {
       return this.$store.state.species;

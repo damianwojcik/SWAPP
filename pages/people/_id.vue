@@ -3,10 +3,10 @@
     <div class="hero-body">
       <div class="container">
         <h1 class="title">Character:</h1>
-        <h2 class="subtitle">{{person.name}}</h2>
+        <h2 class="subtitle">{{data.name}}</h2>
         <table class="table">
           <tbody>
-            <tr v-for="(item, name, index) in person" :key="index">
+            <tr v-for="(item, name, index) in data" :key="index">
               <td>{{name}}</td>
               <td v-if="name === 'films'">
                 <div v-for="(nestedItem, nestedIndex) in item" :key="nestedIndex">
@@ -26,13 +26,8 @@
 
 <script>
 export default {
-  async fetch({ store }) {
-    if (!store.state.people) {
-      await store.dispatch('fetchPeople');
-    }
-  },
   computed: {
-    person() {
+    data() {
       const name = this.$route.params.id.replace(/_/g, ' ');
       return this.$store.getters.getPersonByName(name);
     },
