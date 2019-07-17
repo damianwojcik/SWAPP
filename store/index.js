@@ -44,7 +44,6 @@ export const getters = {
     const updatedSpecies = film.species.map(
       url => state.data.species.find(item => item.url === url).name,
     );
-    // TODO: .
 
     const updatedFilm = {
       ...film,
@@ -54,6 +53,11 @@ export const getters = {
       vehicles: updatedVehicles,
       species: updatedSpecies,
     };
+
+    delete updatedFilm.created;
+    delete updatedFilm.edited;
+    delete updatedFilm.url;
+    // TODO: .
 
     return updatedFilm;
   },
@@ -87,6 +91,10 @@ export const getters = {
       vehicles: updatedVehicles,
     };
 
+    delete updatedPerson.created;
+    delete updatedPerson.edited;
+    delete updatedPerson.url;
+
     return updatedPerson;
   },
   getStarshipByName: state => name => {
@@ -105,6 +113,10 @@ export const getters = {
       films: updatedFilms,
       pilots: updatedPilots,
     };
+
+    delete updatedStarship.created;
+    delete updatedStarship.edited;
+    delete updatedStarship.url;
 
     return updatedStarship;
   },
@@ -125,6 +137,10 @@ export const getters = {
       films: updatedFilms,
       pilots: updatedPilots,
     };
+
+    delete updatedVehicle.created;
+    delete updatedVehicle.edited;
+    delete updatedVehicle.url;
 
     return updatedVehicle;
   },
@@ -150,6 +166,10 @@ export const getters = {
       homeworld: updatedHomeworld,
     };
 
+    delete updatedSpecie.created;
+    delete updatedSpecie.edited;
+    delete updatedSpecie.url;
+
     return updatedSpecie;
   },
   getPlanetByName: state => name => {
@@ -169,6 +189,10 @@ export const getters = {
       films: updatedFilms,
       residents: updatedResidents,
     };
+
+    delete updatedPlanet.created;
+    delete updatedPlanet.edited;
+    delete updatedPlanet.url;
 
     return updatedPlanet;
   },

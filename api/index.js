@@ -13,7 +13,7 @@ const API_ENDPOINTS = [
   'planets',
 ];
 
-const cache = flatCache.load('productsCache');
+const cache = flatCache.load('dataCache');
 
 const flatCacheMiddleware = (req, res, next) => {
   let key = '__express__' + req.originalUrl || req.url;
@@ -44,22 +44,22 @@ async function fetchPaginationAPI(URL) {
 
   result.push.apply(result, data.results);
 
-  if (!data.next) return result;
+  if (data.next) {
+    const nextUrl = data.next.split('=')[0];
 
-  const nextUrl = data.next.split('=')[0];
+    for (let page = 2; page <= paginationCount; page++) {
+      let url = `${nextUrl}=${page}`;
+      promises.push(axios.get(url));
+    }
 
-  for (let page = 2; page <= paginationCount; page++) {
-    let url = `${nextUrl}=${page}`;
-    promises.push(axios.get(url));
+    await axios.all(promises).then(
+      axios.spread((...responses) => {
+        responses.forEach(res => {
+          result.push.apply(result, res.data.results);
+        });
+      }),
+    );
   }
-
-  await axios.all(promises).then(
-    axios.spread((...responses) => {
-      responses.forEach(res => {
-        result.push.apply(result, res.data.results);
-      });
-    }),
-  );
 
   return result;
 }
@@ -82,6 +82,8 @@ app.get('/data', flatCacheMiddleware, async (req, res, next) => {
 
   res.json(data);
 });
+
+// app.listen(3001, () => console.log('Server is up!'));
 
 module.exports = {
   path: '/api',

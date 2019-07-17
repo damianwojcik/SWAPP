@@ -1,7 +1,8 @@
 <template>
   <table class="table">
     <tbody>
-      <tr v-for="(item, name, index) in data" :key="index">
+      <!-- TODO: remove v-if by removing empty arrays in API / getters -->
+      <tr v-for="(item, name, index) in data" :key="index" v-if="item.length">
         <td>{{name}}</td>
         <td v-if="Array.isArray(item) && name !== 'homeworld'">
           <div v-for="(nestedItem, nestedName, nestedIndex) in item" :key="nestedIndex">
