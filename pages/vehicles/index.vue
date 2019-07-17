@@ -4,6 +4,7 @@
       <div class="container">
         <h1 class="title">The Star Wars App</h1>
         <h2 class="subtitle">{{title}}</h2>
+        <!-- TODO: handle names like: 'LAAT/i', TIE/IN interceptor -->
         <div v-for="(item, index) in data" :key="index">
           <nuxt-link
             :to="{ path: `${item.name.replace(/\s+/g, '_').toLowerCase()}` }"
