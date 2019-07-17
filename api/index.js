@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const axios = require('axios');
+const flatCache = require('flat-cache');
 
 const API_BASE_URL = 'https://swapi.co/api';
 const API_ENDPOINTS = [
@@ -11,6 +12,24 @@ const API_ENDPOINTS = [
   'species',
   'planets',
 ];
+
+const cache = flatCache.load('productsCache');
+
+const flatCacheMiddleware = (req, res, next) => {
+  let key = '__express__' + req.originalUrl || req.url;
+  let cacheContent = cache.getKey(key);
+  if (cacheContent) {
+    res.send(cacheContent);
+  } else {
+    res.sendResponse = res.send;
+    res.send = body => {
+      cache.setKey(key, body);
+      cache.save();
+      res.sendResponse(body);
+    };
+    next();
+  }
+};
 
 app.get('/', (req, res, next) => {
   res.send('API root');
@@ -45,7 +64,7 @@ async function fetchPaginationAPI(URL) {
   return result;
 }
 
-app.get('/data', async (req, res, next) => {
+app.get('/data', flatCacheMiddleware, async (req, res, next) => {
   let promises = [];
   let data = {};
 
