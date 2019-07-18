@@ -114,8 +114,6 @@ export const getters = {
       pilots: updatedPilots,
     };
 
-    delete updatedStarship.created;
-    delete updatedStarship.edited;
     delete updatedStarship.url;
 
     return updatedStarship;
@@ -138,8 +136,6 @@ export const getters = {
       pilots: updatedPilots,
     };
 
-    delete updatedVehicle.created;
-    delete updatedVehicle.edited;
     delete updatedVehicle.url;
 
     return updatedVehicle;
@@ -166,8 +162,6 @@ export const getters = {
       homeworld: updatedHomeworld,
     };
 
-    delete updatedSpecie.created;
-    delete updatedSpecie.edited;
     delete updatedSpecie.url;
 
     return updatedSpecie;
@@ -190,8 +184,6 @@ export const getters = {
       residents: updatedResidents,
     };
 
-    delete updatedPlanet.created;
-    delete updatedPlanet.edited;
     delete updatedPlanet.url;
 
     return updatedPlanet;

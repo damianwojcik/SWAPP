@@ -35,8 +35,8 @@ app.get('/', (req, res, next) => {
   res.send('API root');
 });
 
-async function fetchPaginationAPI(URL) {
-  const response = await axios.get(URL);
+async function fetchPaginationAPI(URL, endpoint) {
+  const response = await axios.get(`${URL}/${endpoint}`);
   const data = response ? response.data : null;
   const paginationCount = Math.ceil(data.count / 10);
   let promises = [];
@@ -61,6 +61,12 @@ async function fetchPaginationAPI(URL) {
     );
   }
 
+  result.forEach((item, index) => {
+    item['image'] = `/images/${endpoint}/${index + 1}.jpg`;
+    delete item['created'];
+    delete item['edited'];
+  });
+
   return result;
 }
 
@@ -69,7 +75,7 @@ app.get('/data', flatCacheMiddleware, async (req, res, next) => {
   let data = {};
 
   API_ENDPOINTS.forEach(endpoint =>
-    promises.push(fetchPaginationAPI(`${API_BASE_URL}/${endpoint}`)),
+    promises.push(fetchPaginationAPI(API_BASE_URL, endpoint)),
   );
 
   await axios.all(promises).then(
