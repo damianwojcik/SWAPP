@@ -1,6 +1,6 @@
 <template>
   <div class="Table">
-    <img :src="data.image" :alt="data.name ? data.name : data.title" />
+    <img v-if="data.image" :src="data.image" :alt="data.name ? data.name : data.title" />
     <table class="table">
       <tbody>
         <!-- TODO: remove v-if by removing empty arrays in API / getters -->

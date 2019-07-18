@@ -1,3 +1,4 @@
+const fs = require('fs');
 const express = require('express');
 const app = express();
 const axios = require('axios');
@@ -31,6 +32,8 @@ const flatCacheMiddleware = (req, res, next) => {
   }
 };
 
+// app.listen(3001, () => console.log('Server is up!'));
+
 app.get('/', (req, res, next) => {
   res.send('API root');
 });
@@ -61,8 +64,20 @@ async function fetchPaginationAPI(URL, endpoint) {
     );
   }
 
-  result.forEach((item, index) => {
-    item['image'] = `/images/${endpoint}/${index + 1}.jpg`;
+  result.forEach(item => {
+    let id = item.url.split('/')[item.url.split('/').length - 2];
+    let imagePath = `./static/images/${endpoint}/${id}.jpg`;
+
+    item['id'] = id;
+
+    fs.access(imagePath, fs.constants.F_OK, err => {
+      if (!err) {
+        item['image'] = `/images/${endpoint}/${id}.jpg`;
+      } else {
+        item['image'] = `/images/placeholder400x550.jpg`;
+      }
+    });
+
     delete item['created'];
     delete item['edited'];
   });
@@ -73,6 +88,8 @@ async function fetchPaginationAPI(URL, endpoint) {
 app.get('/data', flatCacheMiddleware, async (req, res, next) => {
   let promises = [];
   let data = {};
+
+  // var start = new Date().getTime();
 
   API_ENDPOINTS.forEach(endpoint =>
     promises.push(fetchPaginationAPI(API_BASE_URL, endpoint)),
@@ -86,10 +103,11 @@ app.get('/data', flatCacheMiddleware, async (req, res, next) => {
     }),
   );
 
+  // var end = new Date().getTime();
+  // console.log('EXECUTION TIME:', end - start);
+
   res.json(data);
 });
-
-// app.listen(3001, () => console.log('Server is up!'));
 
 module.exports = {
   path: '/api',
