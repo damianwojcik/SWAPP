@@ -25,16 +25,26 @@ const updatePeople = (state, people) => {
 };
 
 const updatePlanets = (state, planets) => {
-  const updatedPlanets = planets.map(url => {
-    const planet = state.data.planets.find(item => item.url === url);
+  if (typeof planets === 'object') {
+    const updatedPlanets = planets.map(url => {
+      const planet = state.data.planets.find(item => item.url === url);
 
-    return {
-      id: planet.id,
-      name: planet.name,
-      image: planet.image,
-    };
-  });
-  return updatedPlanets;
+      return {
+        id: planet.id,
+        name: planet.name,
+        image: planet.image,
+      };
+    });
+    return updatedPlanets;
+  }
+  const planet = state.data.planets.find(item => item.url == planets);
+  const updatedPlanet = {
+    id: planet.id,
+    name: planet.name,
+    image: planet.image,
+  };
+
+  return updatedPlanet;
 };
 
 const updateStarships = (state, starships) => {

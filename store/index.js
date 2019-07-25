@@ -62,14 +62,7 @@ export const getters = {
     );
 
     const updatedFilms = updateFilms(state, person.films);
-    const homeworld = state.data.planets.find(
-      item => item.url === person.homeworld,
-    );
-    const updatedHomeworld = {
-      id: homeworld.id,
-      name: homeworld.name,
-      image: homeworld.image,
-    };
+    const updatedHomeworld = updatePlanets(state, person.homeworld);
     const updatedSpecies = updateSpecies(state, person.species);
     const updatedVehicles = updateVehicles(state, person.vehicles);
     const updatedStarships = updateStarships(state, person.starships);
@@ -93,15 +86,7 @@ export const getters = {
     );
 
     const updatedFilms = updateFilms(state, starship.films);
-    const updatedPilots = starship.pilots.map(url => {
-      const person = state.data.people.find(item => item.url === url);
-
-      return {
-        id: person.id,
-        name: person.name,
-        image: person.image,
-      };
-    });
+    const updatedPilots = updatePeople(state, starship.pilots);
 
     const updatedStarship = {
       ...starship,
@@ -119,15 +104,7 @@ export const getters = {
     );
 
     const updatedFilms = updateFilms(state, vehicle.films);
-    const updatedPilots = vehicle.pilots.map(url => {
-      const person = state.data.people.find(item => item.url === url);
-
-      return {
-        id: person.id,
-        name: person.name,
-        image: person.image,
-      };
-    });
+    const updatedPilots = updatePeople(state, vehicle.pilots);
 
     const updatedVehicle = {
       ...vehicle,
@@ -145,23 +122,8 @@ export const getters = {
     );
 
     const updatedFilms = updateFilms(state, specie.films);
-    const updatedPeople = specie.people.map(url => {
-      const person = state.data.people.find(item => item.url === url);
-
-      return {
-        id: person.id,
-        name: person.name,
-        image: person.image,
-      };
-    });
-    const homeworld = state.data.planets.find(
-      item => item.url === specie.homeworld,
-    );
-    const updatedHomeworld = {
-      id: homeworld.id,
-      name: homeworld.name,
-      image: homeworld.image,
-    };
+    const updatedPeople = updatePeople(state, specie.people);
+    const updatedHomeworld = updatePlanets(state, specie.homeworld);
 
     const updatedSpecie = {
       ...specie,
@@ -180,15 +142,7 @@ export const getters = {
     );
 
     const updatedFilms = updateFilms(state, planet.films);
-    const updatedResidents = planet.residents.map(url => {
-      const person = state.data.people.find(item => item.url === url);
-
-      return {
-        id: person.id,
-        name: person.name,
-        image: person.image,
-      };
-    });
+    const updatedResidents = updatePeople(state, planet.residents);
 
     const updatedPlanet = {
       ...planet,
