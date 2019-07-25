@@ -1,5 +1,14 @@
 import axios from 'axios';
 
+import {
+  updateFilms,
+  updatePeople,
+  updatePlanets,
+  updateStarships,
+  updateVehicles,
+  updateSpecies,
+} from './helpers/updateObjects';
+
 const API_BASE_URL = 'http://localhost:3000/api';
 
 export const state = () => ({
@@ -28,52 +37,11 @@ export const getters = {
       film => film.title.toLowerCase() === title,
     );
 
-    // TODO: make a helper function
-    const updatedCharacters = film.characters.map(url => {
-      const person = state.data.people.find(item => item.url === url);
-
-      return {
-        id: person.id,
-        name: person.name,
-        image: person.image,
-      };
-    });
-    const updatedPlanets = film.planets.map(url => {
-      const planet = state.data.planets.find(item => item.url === url);
-
-      return {
-        id: planet.id,
-        name: planet.name,
-        image: planet.image,
-      };
-    });
-    const updatedStarships = film.starships.map(url => {
-      const starship = state.data.starships.find(item => item.url === url);
-
-      return {
-        id: starship.id,
-        name: starship.name,
-        image: starship.image,
-      };
-    });
-    const updatedVehicles = film.vehicles.map(url => {
-      const vehicle = state.data.vehicles.find(item => item.url === url);
-
-      return {
-        id: vehicle.id,
-        name: vehicle.name,
-        image: vehicle.image,
-      };
-    });
-    const updatedSpecies = film.species.map(url => {
-      const specie = state.data.species.find(item => item.url === url);
-
-      return {
-        id: specie.id,
-        name: specie.name,
-        image: specie.image,
-      };
-    });
+    const updatedCharacters = updatePeople(state, film.characters);
+    const updatedPlanets = updatePlanets(state, film.planets);
+    const updatedStarships = updateStarships(state, film.starships);
+    const updatedVehicles = updateVehicles(state, film.vehicles);
+    const updatedSpecies = updateSpecies(state, film.species);
 
     const updatedFilm = {
       ...film,
@@ -85,7 +53,6 @@ export const getters = {
     };
 
     delete updatedFilm.url;
-    // TODO: .
 
     return updatedFilm;
   },
@@ -94,15 +61,7 @@ export const getters = {
       person => person.name.toLowerCase() === name,
     );
 
-    const updatedFilms = person.films.map(url => {
-      const film = state.data.films.find(item => item.url === url);
-
-      return {
-        id: film.id,
-        title: film.title,
-        image: film.image,
-      };
-    });
+    const updatedFilms = updateFilms(state, person.films);
     const homeworld = state.data.planets.find(
       item => item.url === person.homeworld,
     );
@@ -111,33 +70,9 @@ export const getters = {
       name: homeworld.name,
       image: homeworld.image,
     };
-    const updatedSpecies = person.species.map(url => {
-      const specie = state.data.species.find(item => item.url === url);
-
-      return {
-        id: specie.id,
-        name: specie.name,
-        image: specie.image,
-      };
-    });
-    const updatedVehicles = person.vehicles.map(url => {
-      const vehicle = state.data.vehicles.find(item => item.url === url);
-
-      return {
-        id: vehicle.id,
-        name: vehicle.name,
-        image: vehicle.image,
-      };
-    });
-    const updatedStarships = person.starships.map(url => {
-      const starship = state.data.starships.find(item => item.url === url);
-
-      return {
-        id: starship.id,
-        name: starship.name,
-        image: starship.image,
-      };
-    });
+    const updatedSpecies = updateSpecies(state, person.species);
+    const updatedVehicles = updateVehicles(state, person.vehicles);
+    const updatedStarships = updateStarships(state, person.starships);
 
     const updatedPerson = {
       ...person,
@@ -157,15 +92,7 @@ export const getters = {
       starship => starship.name.toLowerCase() === name,
     );
 
-    const updatedFilms = starship.films.map(url => {
-      const film = state.data.films.find(item => item.url === url);
-
-      return {
-        id: film.id,
-        title: film.title,
-        image: film.image,
-      };
-    });
+    const updatedFilms = updateFilms(state, starship.films);
     const updatedPilots = starship.pilots.map(url => {
       const person = state.data.people.find(item => item.url === url);
 
@@ -191,15 +118,7 @@ export const getters = {
       vehicle => vehicle.name.toLowerCase() === name,
     );
 
-    const updatedFilms = vehicle.films.map(url => {
-      const film = state.data.films.find(item => item.url === url);
-
-      return {
-        id: film.id,
-        title: film.title,
-        image: film.image,
-      };
-    });
+    const updatedFilms = updateFilms(state, vehicle.films);
     const updatedPilots = vehicle.pilots.map(url => {
       const person = state.data.people.find(item => item.url === url);
 
@@ -225,15 +144,7 @@ export const getters = {
       specie => specie.name.toLowerCase() === name,
     );
 
-    const updatedFilms = specie.films.map(url => {
-      const film = state.data.films.find(item => item.url === url);
-
-      return {
-        id: film.id,
-        title: film.title,
-        image: film.image,
-      };
-    });
+    const updatedFilms = updateFilms(state, specie.films);
     const updatedPeople = specie.people.map(url => {
       const person = state.data.people.find(item => item.url === url);
 
@@ -268,15 +179,7 @@ export const getters = {
       planet => planet.name.toLowerCase() === name,
     );
 
-    const updatedFilms = planet.films.map(url => {
-      const film = state.data.films.find(item => item.url === url);
-
-      return {
-        id: film.id,
-        title: film.title,
-        image: film.image,
-      };
-    });
+    const updatedFilms = updateFilms(state, planet.films);
     const updatedResidents = planet.residents.map(url => {
       const person = state.data.people.find(item => item.url === url);
 
