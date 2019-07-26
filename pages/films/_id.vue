@@ -14,14 +14,13 @@
 import Table from '@/components/Table';
 
 export default {
+  async asyncData({ params, store }) {
+    const title = params.id.replace(/_/g, ' ');
+    const data = await store.getters.getFilmByTitle(title);
+    return { data };
+  },
   components: {
     Table,
-  },
-  computed: {
-    data() {
-      const title = this.$route.params.id.replace(/_/g, ' ');
-      return this.$store.getters.getFilmByTitle(title);
-    },
   },
 };
 </script>
