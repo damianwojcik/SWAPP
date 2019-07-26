@@ -70,13 +70,11 @@ async function fetchPaginationAPI(URL, endpoint) {
 
     item['id'] = id;
 
-    fs.access(imagePath, fs.constants.F_OK, err => {
-      if (!err) {
-        item['image'] = `/images/${endpoint}/${id}.jpg`;
-      } else {
-        item['image'] = `/images/placeholder400x550.jpg`;
-      }
-    });
+    if (fs.existsSync(imagePath)) {
+      item['image'] = `/images/${endpoint}/${id}.jpg`;
+    } else {
+      item['image'] = `/images/placeholder400x550.jpg`;
+    }
 
     delete item['created'];
     delete item['edited'];
