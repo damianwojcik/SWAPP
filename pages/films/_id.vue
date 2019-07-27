@@ -17,6 +17,7 @@ export default {
   async asyncData({ params, store }) {
     const title = params.id.replace(/_/g, ' ');
     const data = await store.getters.getFilmByTitle(title);
+
     return { data };
   },
   components: {

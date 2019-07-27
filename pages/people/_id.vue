@@ -20,6 +20,7 @@ export default {
   computed: {
     data() {
       const name = this.$route.params.id.replace(/_/g, ' ');
+
       return this.$store.getters.getPersonByName(name);
     },
   },
