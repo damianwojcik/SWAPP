@@ -37,7 +37,7 @@ export const getters = {
       film => film.title.toLowerCase() === title,
     );
 
-    const updatedCharacters = updatePeople(state, film.characters);
+    const updatedPeople = updatePeople(state, film.characters);
     const updatedPlanets = updatePlanets(state, film.planets);
     const updatedStarships = updateStarships(state, film.starships);
     const updatedVehicles = updateVehicles(state, film.vehicles);
@@ -45,7 +45,7 @@ export const getters = {
 
     const updatedFilm = {
       ...film,
-      characters: updatedCharacters,
+      people: updatedPeople,
       planets: updatedPlanets,
       starships: updatedStarships,
       vehicles: updatedVehicles,
@@ -53,6 +53,7 @@ export const getters = {
     };
 
     delete updatedFilm.url;
+    delete updatedFilm.characters;
 
     return updatedFilm;
   },
@@ -62,7 +63,7 @@ export const getters = {
     );
 
     const updatedFilms = updateFilms(state, person.films);
-    const updatedHomeworld = updatePlanets(state, person.homeworld);
+    const updatedPlanets = updatePlanets(state, person.homeworld);
     const updatedSpecies = updateSpecies(state, person.species);
     const updatedVehicles = updateVehicles(state, person.vehicles);
     const updatedStarships = updateStarships(state, person.starships);
@@ -70,13 +71,14 @@ export const getters = {
     const updatedPerson = {
       ...person,
       films: updatedFilms,
-      homeworld: updatedHomeworld,
+      planets: updatedPlanets,
       species: updatedSpecies,
       starships: updatedStarships,
       vehicles: updatedVehicles,
     };
 
     delete updatedPerson.url;
+    delete updatedPerson.homeworld;
 
     return updatedPerson;
   },
@@ -86,15 +88,16 @@ export const getters = {
     );
 
     const updatedFilms = updateFilms(state, starship.films);
-    const updatedPilots = updatePeople(state, starship.pilots);
+    const updatedPeople = updatePeople(state, starship.pilots);
 
     const updatedStarship = {
       ...starship,
       films: updatedFilms,
-      pilots: updatedPilots,
+      people: updatedPeople,
     };
 
     delete updatedStarship.url;
+    delete updatedStarship.pilots;
 
     return updatedStarship;
   },
@@ -104,15 +107,16 @@ export const getters = {
     );
 
     const updatedFilms = updateFilms(state, vehicle.films);
-    const updatedPilots = updatePeople(state, vehicle.pilots);
+    const updatedPeople = updatePeople(state, vehicle.pilots);
 
     const updatedVehicle = {
       ...vehicle,
       films: updatedFilms,
-      pilots: updatedPilots,
+      people: updatedPeople,
     };
 
     delete updatedVehicle.url;
+    delete updatedVehicle.pilots;
 
     return updatedVehicle;
   },
@@ -123,16 +127,17 @@ export const getters = {
 
     const updatedFilms = updateFilms(state, specie.films);
     const updatedPeople = updatePeople(state, specie.people);
-    const updatedHomeworld = updatePlanets(state, specie.homeworld);
+    const updatedPlanets = updatePlanets(state, specie.homeworld);
 
     const updatedSpecie = {
       ...specie,
       films: updatedFilms,
       people: updatedPeople,
-      homeworld: updatedHomeworld,
+      planets: updatedPlanets,
     };
 
     delete updatedSpecie.url;
+    delete updatedSpecie.homeworld;
 
     return updatedSpecie;
   },
@@ -142,15 +147,16 @@ export const getters = {
     );
 
     const updatedFilms = updateFilms(state, planet.films);
-    const updatedResidents = updatePeople(state, planet.residents);
+    const updatedPeople = updatePeople(state, planet.residents);
 
     const updatedPlanet = {
       ...planet,
       films: updatedFilms,
-      residents: updatedResidents,
+      people: updatedPeople,
     };
 
     delete updatedPlanet.url;
+    delete updatedPlanet.residents;
 
     return updatedPlanet;
   },

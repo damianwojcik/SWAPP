@@ -1,39 +1,24 @@
 <template>
   <div class="Table">
     <div class="intro">
-      <img
-        v-if="data.image"
-        class="intro__img"
-        :src="data.image"
-        :alt="data.name ? data.name : data.title"
-      />
+      <img v-if="data.image" class="intro__img" :src="data.image" :alt="data.name" />
       <p v-if="data.opening_crawl" class="intro__text">{{data.opening_crawl}}</p>
     </div>
     <!-- /.intro -->
     <table class="table">
       <tbody>
-        <!-- TODO: use computed instead of data -->
-        <tr
-          v-for="(item, name, index) in data"
-          :key="index"
-          v-if="item.length && name !=='image' && name !=='id' && name !=='opening_crawl' && index !== 0"
-        >
+        <!-- TODO: get rid of v-if-->
+        <tr v-if="item.length" v-for="(item, name, index) in tableData" :key="index">
           <td>{{ name | capitalize }}</td>
           <td v-if="Array.isArray(item)" class="flex">
-            <!-- TODO: handle homeworld for Person -->
-            <!-- <nuxt-link
-                :to="{ path: `/${name === 'characters' || name === 'pilots' || name === 'residents' ? 'people' : name}/${nestedItem.replace(/\s+/g, '_').toLowerCase()}` }"
-            >{{nestedItem}}</nuxt-link>-->
-            <Card
-              :data="nestedItem"
-              v-for="(nestedItem, nestedName, nestedIndex) in item"
-              :key="nestedIndex"
-            />
-          </td>
-          <td v-else-if="name === 'homeworld' && item !== 'unknown'">
-            <nuxt-link
-              :to="{ path: `/planets/${item.replace(/\s+/g, '_').toLowerCase()}` }"
-            >{{item}}</nuxt-link>
+            <template v-for="(nestedItem, nestedIndex) in item">
+              <nuxt-link
+                :key="nestedIndex"
+                :to="{ path: `/${name}/${nestedItem.name.replace(/\s+/g, '_').toLowerCase()}` }"
+              >
+                <Card :data="nestedItem" />
+              </nuxt-link>
+            </template>
           </td>
           <td v-else>{{item}}</td>
         </tr>
@@ -54,6 +39,19 @@ export default {
   props: {
     data: Object,
     required: true,
+  },
+  computed: {
+    tableData() {
+      let tableData = { ...this.data };
+
+      delete tableData.title;
+      delete tableData.name;
+      delete tableData.id;
+      delete tableData.image;
+      delete tableData.opening_crawl;
+
+      return tableData;
+    },
   },
 };
 </script>

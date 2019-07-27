@@ -4,7 +4,7 @@ const updateFilms = (state, films) => {
 
     return {
       id: film.id,
-      title: film.title,
+      name: film.title,
       image: film.image,
     };
   });
@@ -44,7 +44,7 @@ const updatePlanets = (state, planets) => {
     image: planet.image,
   };
 
-  return updatedPlanet;
+  return [updatedPlanet];
 };
 
 const updateStarships = (state, starships) => {

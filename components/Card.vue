@@ -6,7 +6,7 @@
       </figure>
     </div>
     <div class="content">
-      <p class="title is-6">{{data.name ? data.name : data.title}}</p>
+      <p class="title is-6">{{data.name}}</p>
     </div>
   </div>
   <!-- /.Card -->
