@@ -36,128 +36,148 @@ export const getters = {
     const film = state.data.films.find(
       film => film.title.toLowerCase() === title,
     );
-
     const updatedPeople = updatePeople(state, film.characters);
-    const updatedPlanets = updatePlanets(state, film.planets);
     const updatedStarships = updateStarships(state, film.starships);
     const updatedVehicles = updateVehicles(state, film.vehicles);
     const updatedSpecies = updateSpecies(state, film.species);
+    const updatedPlanets = updatePlanets(state, film.planets);
+    let updatedFilm = { ...film };
 
-    const updatedFilm = {
-      ...film,
-      people: updatedPeople,
-      planets: updatedPlanets,
-      starships: updatedStarships,
-      vehicles: updatedVehicles,
-      species: updatedSpecies,
-    };
+    delete updatedFilm.starships;
+    delete updatedFilm.vehicles;
+    delete updatedFilm.species;
+    delete updatedFilm.planets;
 
     delete updatedFilm.url;
     delete updatedFilm.characters;
 
-    return updatedFilm;
+    const sortedFilm = {
+      ...updatedFilm,
+      people: updatedPeople,
+      starships: updatedStarships,
+      vehicles: updatedVehicles,
+      species: updatedSpecies,
+      planets: updatedPlanets,
+    };
+
+    return sortedFilm;
   },
   getPersonByName: state => name => {
     const person = state.data.people.find(
       person => person.name.toLowerCase() === name,
     );
-
     const updatedFilms = updateFilms(state, person.films);
-    const updatedPlanets = updatePlanets(state, person.homeworld);
-    const updatedSpecies = updateSpecies(state, person.species);
-    const updatedVehicles = updateVehicles(state, person.vehicles);
     const updatedStarships = updateStarships(state, person.starships);
+    const updatedVehicles = updateVehicles(state, person.vehicles);
+    const updatedSpecies = updateSpecies(state, person.species);
+    const updatedPlanets = updatePlanets(state, person.homeworld);
+    let updatedPerson = { ...person };
 
-    const updatedPerson = {
-      ...person,
-      films: updatedFilms,
-      planets: updatedPlanets,
-      species: updatedSpecies,
-      starships: updatedStarships,
-      vehicles: updatedVehicles,
-    };
+    delete updatedPerson.films;
+    delete updatedPerson.starships;
+    delete updatedPerson.vehicles;
+    delete updatedPerson.species;
+    delete updatedPerson.planets;
 
     delete updatedPerson.url;
     delete updatedPerson.homeworld;
 
-    return updatedPerson;
+    const sortedPerson = {
+      ...updatedPerson,
+      films: updatedFilms,
+      starships: updatedStarships,
+      vehicles: updatedVehicles,
+      species: updatedSpecies,
+      planets: updatedPlanets,
+    };
+
+    return sortedPerson;
   },
   getStarshipByName: state => name => {
     const starship = state.data.starships.find(
       starship => starship.name.toLowerCase() === name,
     );
-
     const updatedFilms = updateFilms(state, starship.films);
     const updatedPeople = updatePeople(state, starship.pilots);
+    let updatedStarship = { ...starship };
 
-    const updatedStarship = {
-      ...starship,
-      films: updatedFilms,
-      people: updatedPeople,
-    };
+    delete updatedStarship.films;
 
     delete updatedStarship.url;
     delete updatedStarship.pilots;
 
-    return updatedStarship;
+    const sortedStarship = {
+      ...updatedStarship,
+      films: updatedFilms,
+      people: updatedPeople,
+    };
+
+    return sortedStarship;
   },
   getVehicleByName: state => name => {
     const vehicle = state.data.vehicles.find(
       vehicle => vehicle.name.toLowerCase() === name,
     );
-
     const updatedFilms = updateFilms(state, vehicle.films);
     const updatedPeople = updatePeople(state, vehicle.pilots);
+    let updatedVehicle = { ...vehicle };
 
-    const updatedVehicle = {
-      ...vehicle,
-      films: updatedFilms,
-      people: updatedPeople,
-    };
+    delete updatedVehicle.films;
 
     delete updatedVehicle.url;
     delete updatedVehicle.pilots;
 
-    return updatedVehicle;
+    const sortedVehicle = {
+      ...updatedVehicle,
+      films: updatedFilms,
+      people: updatedPeople,
+    };
+
+    return sortedVehicle;
   },
   getSpecieByName: state => name => {
     const specie = state.data.species.find(
       specie => specie.name.toLowerCase() === name,
     );
-
     const updatedFilms = updateFilms(state, specie.films);
     const updatedPeople = updatePeople(state, specie.people);
     const updatedPlanets = updatePlanets(state, specie.homeworld);
+    let updatedSpecie = { ...specie };
 
-    const updatedSpecie = {
-      ...specie,
+    delete updatedSpecie.films;
+    delete updatedSpecie.people;
+
+    delete updatedSpecie.url;
+    delete updatedSpecie.homeworld;
+
+    const sortedSpecie = {
+      ...updatedSpecie,
       films: updatedFilms,
       people: updatedPeople,
       planets: updatedPlanets,
     };
 
-    delete updatedSpecie.url;
-    delete updatedSpecie.homeworld;
-
-    return updatedSpecie;
+    return sortedSpecie;
   },
   getPlanetByName: state => name => {
     const planet = state.data.planets.find(
       planet => planet.name.toLowerCase() === name,
     );
-
     const updatedFilms = updateFilms(state, planet.films);
     const updatedPeople = updatePeople(state, planet.residents);
+    let updatedPlanet = { ...planet };
 
-    const updatedPlanet = {
-      ...planet,
-      films: updatedFilms,
-      people: updatedPeople,
-    };
+    delete updatedPlanet.films;
 
     delete updatedPlanet.url;
     delete updatedPlanet.residents;
 
-    return updatedPlanet;
+    const sortedPlanet = {
+      ...updatedPlanet,
+      films: updatedFilms,
+      people: updatedPeople,
+    };
+
+    return sortedPlanet;
   },
 };
