@@ -17,11 +17,12 @@
 
 <script>
 import axios from 'axios';
+import orderBy from 'lodash.orderby';
 
 export default {
   computed: {
     data() {
-      return this.$store.state.data.people;
+      return orderBy(this.$store.state.data.people, 'name');
     },
   },
   data() {

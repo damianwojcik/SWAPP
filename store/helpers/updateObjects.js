@@ -25,6 +25,10 @@ const updatePeople = (state, people) => {
 };
 
 const updatePlanets = (state, planets) => {
+  if (planets === null) {
+    return;
+  }
+
   if (typeof planets === 'object') {
     const updatedPlanets = planets.map(url => {
       const planet = state.data.planets.find(item => item.url === url);

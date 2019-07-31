@@ -8,7 +8,7 @@
     <table class="table">
       <tbody>
         <!-- TODO: get rid of v-if-->
-        <tr v-if="item.length" v-for="(item, name, index) in tableData" :key="index">
+        <tr v-if="item && item.length" v-for="(item, name, index) in tableData" :key="index">
           <td>{{ name.replace(/_/g, ' ') | capitalize }}</td>
           <td v-if="Array.isArray(item)" class="flex">
             <template v-for="(nestedItem, nestedIndex) in item">

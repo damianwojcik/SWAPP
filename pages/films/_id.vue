@@ -2,8 +2,8 @@
   <section class="hero">
     <div class="hero-body">
       <div class="container">
-        <h1 class="title">Film:</h1>
-        <h2 class="subtitle">{{data.title}}</h2>
+        <h1 class="title">{{data.title}}</h1>
+        <h2 class="subtitle">Film</h2>
         <Table :data="data" />
       </div>
     </div>
