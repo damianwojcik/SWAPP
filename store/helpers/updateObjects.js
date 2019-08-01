@@ -1,3 +1,5 @@
+import orderBy from 'lodash.orderby';
+
 const updateFilms = (state, films) => {
   const updatedFilms = films.map(url => {
     const film = state.data.films.find(item => item.url === url);
@@ -6,9 +8,11 @@ const updateFilms = (state, films) => {
       id: film.id,
       name: film.title,
       image: film.image,
+      episode_id: film.episode_id,
     };
   });
-  return updatedFilms;
+
+  return orderBy(updatedFilms, 'episode_id');
 };
 
 const updatePeople = (state, people) => {
@@ -21,7 +25,8 @@ const updatePeople = (state, people) => {
       image: person.image,
     };
   });
-  return updatedPeople;
+
+  return orderBy(updatedPeople, 'name');
 };
 
 const updatePlanets = (state, planets) => {
@@ -39,7 +44,8 @@ const updatePlanets = (state, planets) => {
         image: planet.image,
       };
     });
-    return updatedPlanets;
+
+    return orderBy(updatedPlanets, 'name');
   }
   const planet = state.data.planets.find(item => item.url == planets);
   const updatedPlanet = {
@@ -61,7 +67,8 @@ const updateStarships = (state, starships) => {
       image: starship.image,
     };
   });
-  return updatedStarships;
+
+  return orderBy(updatedStarships, 'name');
 };
 
 const updateVehicles = (state, vehicles) => {
@@ -74,7 +81,8 @@ const updateVehicles = (state, vehicles) => {
       image: vehicle.image,
     };
   });
-  return updatedVehicles;
+
+  return orderBy(updatedVehicles, 'name');
 };
 
 const updateSpecies = (state, species) => {
@@ -87,7 +95,8 @@ const updateSpecies = (state, species) => {
       image: specie.image,
     };
   });
-  return updatedSpecies;
+
+  return orderBy(updatedSpecies, 'name');
 };
 
 export {
