@@ -4,12 +4,18 @@
       <div class="container">
         <h1 class="title">The Star Wars App</h1>
         <h2 class="subtitle">{{title}}</h2>
-        <div v-for="(item, index) in data" :key="index">
-          <nuxt-link
-            :to="{ path: `${item.name.replace(/\s+/g, '_').toLowerCase().replace(/[\/]/g, '__')}` }"
-            append
-          >{{item.name}}</nuxt-link>
+        <div class="flex">
+          <template v-for="(item, index) in data">
+            <nuxt-link
+              :key="index"
+              :to="{ path: `${item.name.replace(/\s+/g, '_').toLowerCase()}` }"
+              append
+            >
+              <Card :data="item" />
+            </nuxt-link>
+          </template>
         </div>
+        <!-- /.flex -->
       </div>
     </div>
   </section>
@@ -18,8 +24,12 @@
 <script>
 import axios from 'axios';
 import orderBy from 'lodash.orderby';
+import Card from '@/components/Card';
 
 export default {
+  components: {
+    Card,
+  },
   computed: {
     data() {
       return orderBy(this.$store.state.data.vehicles, 'name');

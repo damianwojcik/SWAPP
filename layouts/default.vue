@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <nuxt-link to="/" class="navbar-item">
@@ -33,11 +33,10 @@
     </nav>
     <nuxt />
   </div>
+  <!-- /.container -->
 </template>
 
 <style lang="scss">
-$yellow: #ffe300;
-
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -57,7 +56,9 @@ html {
   margin: 0;
 }
 
-.yellow {
-  color: $yellow;
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
 }
 </style>

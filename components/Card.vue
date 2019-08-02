@@ -6,7 +6,7 @@
       </figure>
     </div>
     <div class="content">
-      <p class="title is-6">{{data.name}}</p>
+      <p class="title is-6">{{data.name ? data.name : data.title }}</p>
     </div>
   </div>
   <!-- /.Card -->
@@ -25,6 +25,17 @@ export default {
 .card {
   width: 128px;
   margin: 0 10px 20px;
+  transition: all 0.2s ease;
+  &:hover {
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.15),
+      0 0 0 1px rgba(10, 10, 10, 0.15);
+    .card-image {
+      opacity: 0.9;
+    }
+    .title {
+      color: #000;
+    }
+  }
   .content {
     display: flex;
     justify-content: center;
@@ -35,9 +46,11 @@ export default {
   .card-image {
     width: 100%;
     border-bottom: 1px solid #efefef;
+    transition: opacity 0.2s ease;
   }
   .title {
     text-align: center;
+    transition: color 0.2s ease;
   }
 }
 </style>

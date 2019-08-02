@@ -61,10 +61,6 @@ export default {
   img {
     max-height: 300px;
   }
-  .flex {
-    display: flex;
-    flex-wrap: wrap;
-  }
   .intro {
     display: flex;
     margin-bottom: 20px;
