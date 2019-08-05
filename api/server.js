@@ -14,7 +14,8 @@ const API_ENDPOINTS = [
   'planets',
 ];
 
-const cache = flatCache.load('dataCache');
+// TODO: check versioning in flatCache
+const cache = flatCache.load('dataCache4');
 
 const flatCacheMiddleware = (req, res, next) => {
   let key = '__express__' + req.originalUrl || req.url;
