@@ -1,23 +1,21 @@
 <template>
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">The Star Wars App</h1>
-        <h2 class="subtitle">{{title}}</h2>
-        <div class="flex">
-          <template v-for="(item, index) in data">
-            <nuxt-link
-              :key="index"
-              :to="{ path: `${item.title.replace(/\s+/g, '_').toLowerCase()}` }"
-              append
-            >
-              <Card :data="item" />
-            </nuxt-link>
-          </template>
-        </div>
-        <!-- /.flex -->
+  <section class="section">
+    <div class="container">
+      <h2 class="title">{{title}}</h2>
+      <div class="flex">
+        <template v-for="(item, index) in data">
+          <nuxt-link
+            :key="index"
+            :to="{ path: `${item.title.replace(/\s+/g, '_').toLowerCase()}` }"
+            append
+          >
+            <Card :data="item" />
+          </nuxt-link>
+        </template>
       </div>
+      <!-- /.flex -->
     </div>
+    <!-- /.container -->
   </section>
 </template>
 

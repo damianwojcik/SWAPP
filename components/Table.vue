@@ -58,14 +58,41 @@ export default {
 
 <style lang="scss" scoped>
 .Table {
-  img {
-    max-height: 300px;
+  .table {
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
   .intro {
     display: flex;
     margin-bottom: 20px;
     &__text {
       margin-left: 20px;
+    }
+    &__img {
+      max-height: 300px;
+    }
+    @media (max-width: 520px) {
+      flex-direction: column;
+      &__img {
+        max-width: none;
+        margin-bottom: 10px;
+      }
+      &__text {
+        margin-left: 0;
+      }
+    }
+  }
+  .flex {
+    justify-content: flex-start;
+    @media (max-width: 520px) {
+      justify-content: space-around;
+    }
+  }
+  .card {
+    margin: 10px;
+    @media (max-width: 1024px) {
+      margin: 10px 10px 0;
     }
   }
 }
