@@ -9,7 +9,7 @@ import {
   updateSpecies,
 } from './helpers/updateObjects';
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'https://swapp-nuxt.herokuapp.com/api';
 
 export const state = () => ({
   data: null,
