@@ -6,7 +6,7 @@
         <template v-for="(item, index) in data">
           <nuxt-link
             :key="index"
-            :to="{ path: `${item.title.replace(/\s+/g, '_').toLowerCase()}` }"
+            :to="{ path: `${item.name.replace(/\s+/g, '_').toLowerCase()}` }"
             append
           >
             <Card :data="item" />

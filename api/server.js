@@ -15,7 +15,7 @@ const API_ENDPOINTS = [
 ];
 
 // TODO: check versioning in flatCache
-const cache = flatCache.load('dataCache4');
+const cache = flatCache.load('dataCache5');
 
 const flatCacheMiddleware = (req, res, next) => {
   let key = '__express__' + req.originalUrl || req.url;
@@ -79,6 +79,11 @@ async function fetchPaginationAPI(URL, endpoint) {
 
     delete item['created'];
     delete item['edited'];
+
+    if (endpoint === 'films') {
+      item['name'] = item.title;
+      delete item.title;
+    }
   });
 
   return result;
