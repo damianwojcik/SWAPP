@@ -86,3 +86,7 @@ sw.*
 
 # Mac OSX
 .DS_Store
+
+# others
+package-lock.json
+yarn.lock

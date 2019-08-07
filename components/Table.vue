@@ -44,7 +44,6 @@ export default {
     tableData() {
       let tableData = { ...this.data };
 
-      delete tableData.title;
       delete tableData.name;
       delete tableData.id;
       delete tableData.image;

@@ -49,7 +49,7 @@
       <div class="content has-text-centered">
         <p>
           <strong>SWAPP</strong> by
-          <a href="http://dwojcik.pro/" target="_blank" rel="noopener">Damian Wójcik</a>.
+          <a href="http://dwojcik.pro/" target="_blank" rel="noopener">Damian Wójcik</a>
           <small>
             Images:
             <a
@@ -57,7 +57,9 @@
               target="_blank"
               rel="noopener"
             >Wookiepedia</a>
-            | Code:
+          </small>
+          <small>
+            Code:
             <a
               href="https://github.com/damianwojcik/SWAPP"
               target="_blank"
@@ -106,6 +108,20 @@ html {
   margin: 0;
 }
 
+.page {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.section {
+  flex: 1;
+}
+
+.tile {
+  width: 100%;
+}
+
 .flex {
   display: flex;
   flex-wrap: wrap;
@@ -137,8 +153,9 @@ html {
 
 footer {
   small {
+    font-size: 0.7em;
     display: block;
-    margin-top: 5px;
+    margin-top: 7px;
   }
 }
 </style>

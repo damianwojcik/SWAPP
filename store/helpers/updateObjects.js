@@ -6,7 +6,7 @@ const updateFilms = (state, films) => {
 
     return {
       id: film.id,
-      name: film.title,
+      name: film.name,
       image: film.image,
       episode_id: film.episode_id,
     };

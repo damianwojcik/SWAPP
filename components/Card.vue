@@ -6,7 +6,7 @@
       </figure>
     </div>
     <div class="content">
-      <p class="title is-6">{{data.name ? data.name : data.title }}</p>
+      <p class="title is-6">{{data.name}}</p>
     </div>
   </div>
   <!-- /.Card -->
@@ -26,6 +26,9 @@ export default {
   width: 128px;
   margin: 0 10px 20px;
   transition: all 0.2s ease;
+  @media (min-width: 1024px) {
+    margin: 0 20px 30px;
+  }
   &:hover {
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.15),
       0 0 0 1px rgba(10, 10, 10, 0.15);

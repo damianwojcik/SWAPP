@@ -32,9 +32,9 @@ export const actions = {
 };
 
 export const getters = {
-  getFilmByTitle: state => title => {
+  getFilmByName: state => name => {
     const film = state.data.films.find(
-      film => film.title.toLowerCase() === title,
+      film => film.name.toLowerCase() === name,
     );
     const updatedPeople = updatePeople(state, film.characters);
     const updatedStarships = updateStarships(state, film.starships);
@@ -179,5 +179,8 @@ export const getters = {
     };
 
     return sortedPlanet;
+  },
+  getCategories: state => () => {
+    return Object.keys(state.data);
   },
 };

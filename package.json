@@ -20,7 +20,8 @@
     "@nuxtjs/pwa": "^2.6.0",
     "flat-cache": "^2.0.1",
     "lodash.orderby": "^4.6.0",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "swiper": "^4.5.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",
