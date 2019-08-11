@@ -4,6 +4,11 @@
   "description": "Nuxt.js Demo App that consumes swapi.co",
   "author": "Damian Wójcik",
   "private": true,
+  "config": {
+    "nuxt": {
+      "port": "3333"
+    }
+  },
   "scripts": {
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "yarn lint",
