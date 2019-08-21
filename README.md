@@ -2,6 +2,10 @@
 
 > The Star Wars App
 
+## demo
+
+https://swapp-nuxt.herokuapp.com/ (heroku)
+
 ## Build Setup
 
 ``` bash
