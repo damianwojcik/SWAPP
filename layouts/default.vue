@@ -49,7 +49,7 @@
       <div class="content has-text-centered">
         <p>
           <strong>SWAPP</strong> by
-          <a href="http://dwojcik.pro/" target="_blank" rel="noopener">Damian Wójcik</a>
+          <a href="http://dwojcik.me/" target="_blank" rel="noopener">Damian Wójcik</a>
           <small>
             Images:
             <a
