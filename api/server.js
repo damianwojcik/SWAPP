@@ -93,8 +93,6 @@ app.get('/data', flatCacheMiddleware, async (req, res, next) => {
   let promises = [];
   let data = {};
 
-  // var start = new Date().getTime();
-
   API_ENDPOINTS.forEach(endpoint =>
     promises.push(fetchPaginationAPI(API_BASE_URL, endpoint)),
   );
@@ -106,9 +104,6 @@ app.get('/data', flatCacheMiddleware, async (req, res, next) => {
       });
     }),
   );
-
-  // var end = new Date().getTime();
-  // console.log('EXECUTION TIME:', end - start);
 
   res.json(data);
 });

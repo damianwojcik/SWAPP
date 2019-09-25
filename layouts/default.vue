@@ -47,11 +47,15 @@
     <nuxt />
     <footer class="footer">
       <div class="content has-text-centered">
+        <strong>SWAPP</strong> by
+        <a href="http://dwojcik.me/" target="_blank" rel="noopener">Damian Wójcik</a>
         <p>
-          <strong>SWAPP</strong> by
-          <a href="http://dwojcik.pro/" target="_blank" rel="noopener">Damian Wójcik</a>
           <small>
-            Images:
+            API:
+            <a href="https://swapi.co/" target="_blank" rel="noopener">SWAPI</a>
+          </small>
+          <small>
+            API:
             <a
               href="https://starwars.fandom.com/wiki/Main_Page"
               target="_blank"
@@ -77,21 +81,21 @@
 export default {
   data() {
     return {
-      navActive: false,
+      navActive: false
     };
   },
   methods: {
     toggleNavActive() {
       this.navActive = !this.navActive;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss">
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -154,7 +158,7 @@ html {
 footer {
   small {
     font-size: 0.7em;
-    display: block;
+    display: inline-block;
     margin-top: 7px;
   }
 }

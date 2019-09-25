@@ -33,13 +33,13 @@
 </template>
 
 <script>
-import Slider from '@/components/Slider';
-import StatBox from '@/components/StatBox';
+import Slider from "@/components/Slider";
+import StatBox from "@/components/StatBox";
 
 export default {
   components: {
     Slider,
-    StatBox,
-  },
+    StatBox
+  }
 };
 </script>
