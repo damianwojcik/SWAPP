@@ -6,19 +6,19 @@ import {
   updatePlanets,
   updateStarships,
   updateVehicles,
-  updateSpecies,
+  updateSpecies
 } from './helpers/updateObjects';
 
 const API_BASE_URL = 'https://swapp-nuxt.herokuapp.com/api';
 
 export const state = () => ({
-  data: null,
+  data: null
 });
 
 export const mutations = {
   SET_DATA: (state, payload) => {
     state.data = payload;
-  },
+  }
 };
 
 export const actions = {
@@ -28,13 +28,13 @@ export const actions = {
   async fetchData({ commit }) {
     const { data } = await axios.get(`${API_BASE_URL}/data`);
     commit('SET_DATA', data);
-  },
+  }
 };
 
 export const getters = {
   getFilmByName: state => name => {
     const film = state.data.films.find(
-      film => film.name.toLowerCase() === name,
+      film => film.name.toLowerCase() === name
     );
     const updatedPeople = updatePeople(state, film.characters);
     const updatedStarships = updateStarships(state, film.starships);
@@ -57,14 +57,14 @@ export const getters = {
       starships: updatedStarships,
       vehicles: updatedVehicles,
       species: updatedSpecies,
-      planets: updatedPlanets,
+      planets: updatedPlanets
     };
 
     return sortedFilm;
   },
   getPersonByName: state => name => {
     const person = state.data.people.find(
-      person => person.name.toLowerCase() === name,
+      person => person.name.toLowerCase() === name
     );
     const updatedFilms = updateFilms(state, person.films);
     const updatedStarships = updateStarships(state, person.starships);
@@ -88,14 +88,14 @@ export const getters = {
       starships: updatedStarships,
       vehicles: updatedVehicles,
       species: updatedSpecies,
-      planets: updatedPlanets,
+      planets: updatedPlanets
     };
 
     return sortedPerson;
   },
   getStarshipByName: state => name => {
     const starship = state.data.starships.find(
-      starship => starship.name.toLowerCase() === name,
+      starship => starship.name.toLowerCase() === name
     );
     const updatedFilms = updateFilms(state, starship.films);
     const updatedPeople = updatePeople(state, starship.pilots);
@@ -109,14 +109,14 @@ export const getters = {
     const sortedStarship = {
       ...updatedStarship,
       films: updatedFilms,
-      people: updatedPeople,
+      people: updatedPeople
     };
 
     return sortedStarship;
   },
   getVehicleByName: state => name => {
     const vehicle = state.data.vehicles.find(
-      vehicle => vehicle.name.toLowerCase() === name,
+      vehicle => vehicle.name.toLowerCase() === name
     );
     const updatedFilms = updateFilms(state, vehicle.films);
     const updatedPeople = updatePeople(state, vehicle.pilots);
@@ -130,14 +130,14 @@ export const getters = {
     const sortedVehicle = {
       ...updatedVehicle,
       films: updatedFilms,
-      people: updatedPeople,
+      people: updatedPeople
     };
 
     return sortedVehicle;
   },
   getSpecieByName: state => name => {
     const specie = state.data.species.find(
-      specie => specie.name.toLowerCase() === name,
+      specie => specie.name.toLowerCase() === name
     );
     const updatedFilms = updateFilms(state, specie.films);
     const updatedPeople = updatePeople(state, specie.people);
@@ -154,14 +154,14 @@ export const getters = {
       ...updatedSpecie,
       films: updatedFilms,
       people: updatedPeople,
-      planets: updatedPlanets,
+      planets: updatedPlanets
     };
 
     return sortedSpecie;
   },
   getPlanetByName: state => name => {
     const planet = state.data.planets.find(
-      planet => planet.name.toLowerCase() === name,
+      planet => planet.name.toLowerCase() === name
     );
     const updatedFilms = updateFilms(state, planet.films);
     const updatedPeople = updatePeople(state, planet.residents);
@@ -175,12 +175,12 @@ export const getters = {
     const sortedPlanet = {
       ...updatedPlanet,
       films: updatedFilms,
-      people: updatedPeople,
+      people: updatedPeople
     };
 
     return sortedPlanet;
   },
   getCategories: state => () => {
     return Object.keys(state.data);
-  },
+  }
 };

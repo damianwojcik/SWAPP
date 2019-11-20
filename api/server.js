@@ -11,7 +11,7 @@ const API_ENDPOINTS = [
   'starships',
   'vehicles',
   'species',
-  'planets',
+  'planets'
 ];
 
 // TODO: check versioning in flatCache
@@ -61,7 +61,7 @@ async function fetchPaginationAPI(URL, endpoint) {
         responses.forEach(res => {
           result.push.apply(result, res.data.results);
         });
-      }),
+      })
     );
   }
 
@@ -102,13 +102,21 @@ app.get('/data', flatCacheMiddleware, async (req, res, next) => {
       responses.forEach((res, index) => {
         data[API_ENDPOINTS[index]] = res;
       });
-    }),
+    })
   );
+
+  data.people.forEach(person => {
+    if (person.species[0]) {
+      person.species[0] = data.species.find(
+        specie => specie.url == person.species[0]
+      ).name;
+    }
+  });
 
   res.json(data);
 });
 
 module.exports = {
   path: '/api',
-  handler: app,
+  handler: app
 };

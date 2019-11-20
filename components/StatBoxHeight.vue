@@ -1,19 +1,23 @@
 <template>
   <div class="StatBox box">
-    <!-- TODO: ^v sort -->
-    <h3 class="StatBox__title">Tallest People</h3>
+    <h3 class="StatBox__title" @click="handleClickTitle">{{ title }}</h3>
     <div class="StatBox__entry" v-for="(person, index) in people" :key="person.id">
-      <span class="index">{{index + 1}}</span>
+      <span class="index">{{ index + 1 }}</span>
       <span class="name">
         <nuxt-link
-          :to="{ path: `/people/${person.name.replace(/\s+/g, '_').toLowerCase()}` }"
-        >{{person.name}}</nuxt-link>
+          :to="{
+            path: `/people/${person.name.replace(/\s+/g, '_').toLowerCase()}`
+          }"
+        >{{ person.name }}</nuxt-link>
       </span>
       <span class="detail">
-        <!-- TODO: add proper path -->
-        <nuxt-link :to="{ path: `/species/luke` }">tba</nuxt-link>
+        <nuxt-link :to="{ path: `/species/${person.specie.toLowerCase()}` }">
+          {{
+          person.specie
+          }}
+        </nuxt-link>
       </span>
-      <span class="value">{{person.height}}</span>
+      <span class="value">{{ person.height }} cm</span>
     </div>
     <!-- /.StatBox__entry -->
     <nuxt-link class="link" :to="{ path: `/people` }">View all</nuxt-link>
@@ -23,6 +27,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      sort: 'desc',
+    };
+  },
   computed: {
     people() {
       const people = [...this.$store.state.data.people];
@@ -32,13 +41,23 @@ export default {
             id: person.id,
             name: person.name,
             height: person.height,
-            specie: person.species[0],
+            specie: person.species[0] ? person.species[0] : '',
           };
         })
-        .sort((a, b) => b.height - a.height)
+        .sort((a, b) =>
+          this.sort === 'desc' ? a.height - b.height : b.height - a.height,
+        )
         .slice(0, 5);
 
       return sortedPeople;
+    },
+    title() {
+      return this.sort === 'asc' ? 'Tallest People ⇅' : 'Shortest People ⇅';
+    },
+  },
+  methods: {
+    handleClickTitle() {
+      return this.sort === 'asc' ? (this.sort = 'desc') : (this.sort = 'asc');
     },
   },
 };
@@ -57,6 +76,7 @@ export default {
     margin-bottom: 20px;
     text-align: center;
     font-weight: bold;
+    cursor: pointer;
   }
   &__entry {
     display: flex;

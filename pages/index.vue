@@ -12,17 +12,17 @@
       <div class="tile is-ancestor">
         <div class="tile is-4 is-vertical is-parent">
           <div class="tile is-child">
-            <StatBox />
+            <StatBoxHeight />
           </div>
         </div>
         <div class="tile is-4 is-vertical is-parent">
-          <div class="tile is-child box">
-            <p class="title">Box 2</p>
+          <div class="tile is-child">
+            <StatBoxWeight />
           </div>
         </div>
         <div class="tile is-4 is-vertical is-parent">
-          <div class="tile is-child box">
-            <p class="title">Box 3</p>
+          <div class="tile is-child">
+            <StatBoxPopulation />
           </div>
         </div>
       </div>
@@ -33,13 +33,17 @@
 </template>
 
 <script>
-import Slider from "@/components/Slider";
-import StatBox from "@/components/StatBox";
+import Slider from '@/components/Slider';
+import StatBoxHeight from '@/components/StatBoxHeight';
+import StatBoxWeight from '@/components/StatBoxWeight';
+import StatBoxPopulation from '@/components/StatBoxPopulation';
 
 export default {
   components: {
     Slider,
-    StatBox
-  }
+    StatBoxHeight,
+    StatBoxWeight,
+    StatBoxPopulation,
+  },
 };
 </script>
