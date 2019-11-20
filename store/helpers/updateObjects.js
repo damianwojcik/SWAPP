@@ -8,7 +8,7 @@ const updateFilms = (state, films) => {
       id: film.id,
       name: film.name,
       image: film.image,
-      episode_id: film.episode_id,
+      episode_id: film.episode_id
     };
   });
 
@@ -22,7 +22,7 @@ const updatePeople = (state, people) => {
     return {
       id: person.id,
       name: person.name,
-      image: person.image,
+      image: person.image
     };
   });
 
@@ -41,7 +41,7 @@ const updatePlanets = (state, planets) => {
       return {
         id: planet.id,
         name: planet.name,
-        image: planet.image,
+        image: planet.image
       };
     });
 
@@ -51,7 +51,7 @@ const updatePlanets = (state, planets) => {
   const updatedPlanet = {
     id: planet.id,
     name: planet.name,
-    image: planet.image,
+    image: planet.image
   };
 
   return [updatedPlanet];
@@ -64,7 +64,7 @@ const updateStarships = (state, starships) => {
     return {
       id: starship.id,
       name: starship.name,
-      image: starship.image,
+      image: starship.image
     };
   });
 
@@ -78,7 +78,7 @@ const updateVehicles = (state, vehicles) => {
     return {
       id: vehicle.id,
       name: vehicle.name,
-      image: vehicle.image,
+      image: vehicle.image
     };
   });
 
@@ -86,13 +86,13 @@ const updateVehicles = (state, vehicles) => {
 };
 
 const updateSpecies = (state, species) => {
-  const updatedSpecies = species.map(url => {
-    const specie = state.data.species.find(item => item.url === url);
+  const updatedSpecies = species.map(name => {
+    const specie = state.data.species.find(item => item.name == name);
 
     return {
       id: specie.id,
       name: specie.name,
-      image: specie.image,
+      image: specie.image
     };
   });
 
@@ -105,5 +105,5 @@ export {
   updatePlanets,
   updateStarships,
   updateVehicles,
-  updateSpecies,
+  updateSpecies
 };

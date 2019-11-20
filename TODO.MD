@@ -1,3 +1,6 @@
+# Features
+- PL/ANG language
+
 # Tech
 - GraphQL (Vue-Apollo)
 - PWA
