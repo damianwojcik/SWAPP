@@ -37,11 +37,16 @@ export default {
       const people = [...this.$store.state.data.people];
       let sortedPeople = people
         .map(person => {
+          console.log(person.species[0]);
           return {
             id: person.id,
             name: person.name,
             height: person.height,
-            specie: person.species[0] ? person.species[0] : '',
+            specie: person.species[0]
+              ? this.$store.state.data.species.find(
+                  specie => specie.url === person.species[0],
+                ).name
+              : '',
           };
         })
         .sort((a, b) =>

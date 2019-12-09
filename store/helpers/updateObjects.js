@@ -86,29 +86,16 @@ const updateVehicles = (state, vehicles) => {
 };
 
 const updateSpecies = (state, species) => {
-  if (species.length > 1) {
-    const updatedSpecies = species.map(url => {
-      const specie = state.data.species.find(item => item.url === url);
+  const updatedSpecies = species.map(url => {
+    const specie = state.data.species.find(item => item.url === url);
 
-      return {
-        id: specie.id,
-        name: specie.name,
-        image: specie.image
-      };
-    });
-    return orderBy(updatedSpecies, 'name');
-  } else {
-    const updatedSpecies = species.map(name => {
-      const specie = state.data.species.find(item => item.name === name);
-
-      return {
-        id: specie.id,
-        name: specie.name,
-        image: specie.image
-      };
-    });
-    return orderBy(updatedSpecies, 'name');
-  }
+    return {
+      id: specie.id,
+      name: specie.name,
+      image: specie.image
+    };
+  });
+  return orderBy(updatedSpecies, 'name');
 };
 
 export {

@@ -41,7 +41,11 @@ export default {
             id: person.id,
             name: person.name,
             weight: person.mass,
-            specie: person.species[0] ? person.species[0] : '',
+            specie: person.species[0]
+              ? this.$store.state.data.species.find(
+                  specie => specie.url === person.species[0],
+                ).name
+              : '',
           };
         })
         .sort((a, b) =>
