@@ -15,7 +15,7 @@ const API_ENDPOINTS = [
 ];
 
 // TODO: check versioning in flatCache
-const cache = flatCache.load('dataCache5');
+const cache = flatCache.load('dataCache7');
 
 const flatCacheMiddleware = (req, res, next) => {
   let key = '__express__' + req.originalUrl || req.url;
@@ -94,7 +94,7 @@ app.get('/data', flatCacheMiddleware, async (req, res, next) => {
   let data = {};
 
   API_ENDPOINTS.forEach(endpoint =>
-    promises.push(fetchPaginationAPI(API_BASE_URL, endpoint)),
+    promises.push(fetchPaginationAPI(API_BASE_URL, endpoint))
   );
 
   await axios.all(promises).then(
@@ -104,14 +104,6 @@ app.get('/data', flatCacheMiddleware, async (req, res, next) => {
       });
     })
   );
-
-  data.people.forEach(person => {
-    if (person.species[0]) {
-      person.species[0] = data.species.find(
-        specie => specie.url == person.species[0]
-      ).name;
-    }
-  });
 
   res.json(data);
 });
