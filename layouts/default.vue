@@ -48,11 +48,11 @@
     <footer class="footer">
       <div class="content has-text-centered">
         <strong>SWAPP</strong> by
-        <a href="http://dwojcik.me/" target="_blank" rel="noopener">Damian Wójcik</a>
+        <a href="http://dwojcik.dev/" target="_blank" rel="noopener">Damian Wójcik</a>
         <p>
           <small>
             API:
-            <a href="https://swapi.co/" target="_blank" rel="noopener">SWAPI</a>
+            <a href="https://swapi.dev/" target="_blank" rel="noopener">swapi.dev</a>
           </small>
           <small>
             API:

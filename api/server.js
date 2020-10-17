@@ -4,7 +4,7 @@ const app = express();
 const axios = require('axios');
 const flatCache = require('flat-cache');
 
-const API_BASE_URL = 'https://swapi.co/api';
+const API_BASE_URL = 'https://swapi.dev/api';
 const API_ENDPOINTS = [
   'films',
   'people',
@@ -15,7 +15,7 @@ const API_ENDPOINTS = [
 ];
 
 // TODO: check versioning in flatCache
-const cache = flatCache.load('dataCache7');
+const cache = flatCache.load('dataCache8');
 
 const flatCacheMiddleware = (req, res, next) => {
   let key = '__express__' + req.originalUrl || req.url;

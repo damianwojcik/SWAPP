@@ -1,7 +1,7 @@
 {
   "name": "swapp",
   "version": "1.0.0",
-  "description": "Nuxt.js Demo App that consumes swapi.co",
+  "description": "Nuxt.js Demo App that consumes swapi.dev",
   "author": "Damian Wójcik",
   "private": true,
   "config": {
@@ -25,13 +25,16 @@
     "@nuxtjs/pwa": "^2.6.0",
     "flat-cache": "^2.0.1",
     "lodash.orderby": "^4.6.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.14.7",
     "swiper": "^4.5.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",
     "@nuxtjs/eslint-module": "^0.0.1",
+    "@vue/test-utils": "^1.0.0-beta.27",
+    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.1.0",
     "eslint": "^5.15.1",
     "eslint-config-standard": ">=12.0.0",
     "eslint-plugin-import": ">=2.16.0",
@@ -41,13 +44,10 @@
     "eslint-plugin-promise": ">=4.0.1",
     "eslint-plugin-standard": ">=4.0.0",
     "eslint-plugin-vue": "^5.2.2",
-    "@vue/test-utils": "^1.0.0-beta.27",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "^24.1.0",
     "jest": "^24.1.0",
-    "vue-jest": "^3.0.3",
-    "nodemon": "^1.18.9",
     "node-sass": "^4.12.0",
-    "sass-loader": "^7.1.0"
+    "nodemon": "^1.18.9",
+    "sass-loader": "^7.1.0",
+    "vue-jest": "^3.0.3"
   }
 }
