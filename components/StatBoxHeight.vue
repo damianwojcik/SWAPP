@@ -37,7 +37,6 @@ export default {
       const people = [...this.$store.state.data.people];
       let sortedPeople = people
         .map(person => {
-          console.log(person.species[0]);
           return {
             id: person.id,
             name: person.name,
